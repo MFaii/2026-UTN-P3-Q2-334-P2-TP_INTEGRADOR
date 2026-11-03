@@ -12,7 +12,7 @@ Proyecto desarrollado como parte del trabajo práctico integrador
 git clone https://github.com/MFaii/2026-UTN-P3-Q2-334-P2-TP_INTEGRADOR.git
 ```
 
-2. Ingresar al directorio del proyecto:
+2. Ingresar al directorio del backend:
 
 ```bash
 cd tp-backend/
