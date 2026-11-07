@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principal</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img class="" src="" alt="logo">
+        </div>
+
+        <nav>
+            <ul>
+                <li class="lista-header">
+                    <a href="index.html">Principal</a>
+                </li>
+
+                <li class="lista-header">
+                    <a href="get.html">Obtener</a>
+                </li>
+
+                <li class="lista-header">
+                    <a href="post.html">Crear</a>
+                </li>
+
+                <li class="lista-header">
+                    <a href="put.html">Modificar</a>
+                </li>
+
+                <li class="lista-header">
+                    <a href="delete.html">Eliminar</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contenedor-productos"></section>
+    </main>
+
+    <script>
+        const urlBase = "http://localhost:3001";
+        const contenedorProductos = document.getElementById("contenedor-productos");
+
+        async function obtenerProductos() {
+            try {
+                const response = await fetch(`${urlBase}/api/products`);
+                console.log(response);
+
+                const data = await response.json();
+                
+                const productos = data.payload;
+
+                renderizarProducto(productos);
+
+            } catch (error) {
+                console.error("Error al obtener productos: " , error);
+                
+            }
+        }
+
+        function renderizarProducto(array) {
+            let htmlProductos = "";
+
+            array.forEach(producto => {
+                htmlProductos += `
+                <div class="card-producto">
+                    <img class="card-img" src="${producto.image}" alt="${producto.name}">
+                    <h4>${producto.name}</h4>
+                    <p>ID: ${producto.id}</p>
+                    <p>$ ${producto.price}</p>
+                </div>
+                `;
+            });
+
+            contenedorProductos.innerHTML = htmlProductos;
+        }
+
+        obtenerProductos();
+    </script>
+   
+</body>
+</html>
