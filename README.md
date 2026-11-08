@@ -72,23 +72,37 @@ http://localhost:3001
 │
 ├── README.md
 │
-└── tp-backend/
+├── bd/
+│   └── tp_tienda.sql
+│
+├── tp-backend/
+│   │
+│   ├── node_modules/
+│   │
+│   ├── src/
+│   │   └── api/
+│   │       ├── config/
+│   │       │   └── environments.js
+│   │       │
+│   │       └── database/
+│   │           └── db.js
+│   │
+│   ├── .env
+│   ├── .gitignore
+│   ├── index.js
+│   ├── package.json
+│   └── package-lock.json
+│
+└── tp-vistas-back/
     │
-    ├── node_modules/
+    ├── css/
+    │   └── style.css
     │
-    ├── src/
-    │   └── api/
-    │       ├── config/
-    │       │   └── environments.js
-    │       │
-    │       └── database/
-    │           └── db.js
-    │
-    ├── .env
-    ├── .gitignore
-    ├── index.js
-    ├── package.json
-    └── package-lock.json
+    ├── index.html
+    ├── get.html
+    ├── post.html
+    ├── put.html
+    └── delete.html
 
 ```
 
