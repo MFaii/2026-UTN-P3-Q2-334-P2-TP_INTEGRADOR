@@ -1,145 +1,120 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eliminar</title>
-    <link rel="stylesheet" href="css/style.css">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Eliminar</title>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<header class="main-header">
+			<div class="logo-container">
+				<img class="logo" src="https://imgs.search.brave.com/8h4vB2gSbouXiOR60Pn4my-vtEp8diBu5KRBHIR7s_I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mcmVl/cG5naW1nLmNvbS90/aHVtYi9sb2dvLzcx/NzY2LWxvZ28tdmVj/dG9yLWRlc2lnbi1p/bGx1c3RyYXRpb24t/cGhvZW5peC1oZC1p/bWFnZS1mcmVlLXBu/Zy10aHVtYi53ZWJw" alt="logo" />
+			</div>
 
-</head>
-<body>
-    <header>
-        <div class="logo-container">
-            <img class="" src="" alt="logo">
-        </div>
+			<nav class="nav-links">
+				<a href="index.html">Principal</a>
 
-        <nav>
-            <ul>
-                <li class="lista-header">
-                    <a href="index.html">Principal</a>
-                </li>
+				<a href="get.html">Obtener</a>
 
-                <li class="lista-header">
-                    <a href="get.html">Obtener</a>
-                </li>
+				<a href="post.html">Crear</a>
 
-                <li class="lista-header">
-                    <a href="post.html">Crear</a>
-                </li>
+				<a href="put.html">Modificar</a>
 
-                <li class="lista-header">
-                    <a href="put.html">Modificar</a>
-                </li>
+				<a href="delete.html">Eliminar</a>
+			</nav>
+		</header>
 
-                <li class="lista-header">
-                    <a href="delete.html">Eliminar</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+		<main>
+			<div class="form-getter">
+				<h3>Consultar producto por ID</h3>
 
-     <main>
-        <h3>Consultar producto por id</h3>
-        
-        <form id="getProductForm">
-            <label for="idProd">Id producto</label>
-            <input type="number" name="id" id="idProd" min="1" required>
+				<form id="getProductForm">
+					<label for="idProd">ID Producto</label>
+					<input type="number" name="id" id="idProd" min="1" required />
 
-            <input type="submit" value="Consultar">
-        </form>
+					<input type="submit" value="Consultar" />
+				</form>
+			</div>
+			<section id="contenedor-productos" class="catalog-section"></section>
+		</main>
 
-        <section id="contenedor-productos"></section>
-    </main>
+		<footer class="main-footer">
+			<p>&copy; 2026 Tienda ficticia. Todos los derechos reservados</p>
+		</footer>
 
-    <script>
-        const urlBase = "http://localhost:3001";
-        const contenedorProductos = document.getElementById("contenedor-productos");
-        const getProductForm = document.getElementById("getProductForm");
+		<script>
+			const urlBase = "http://localhost:3001";
+			const contenedorProductos = document.getElementById("contenedor-productos");
+			const getProductForm = document.getElementById("getProductForm");
 
-        
-        getProductForm.addEventListener("submit", async (event) => {
-            event.preventDefault(); 
+			getProductForm.addEventListener("submit", async (event) => {
+				event.preventDefault();
 
+				const idProd = event.target.idProd.value.trim();
+				console.log(idProd);
 
-            const idProd = event.target.idProd.value.trim();
-            console.log(idProd); 
+				try {
+					const response = await fetch(`${urlBase}/api/products/${idProd}`);
+					console.log(response);
 
-            try {
-                const response = await fetch(`${urlBase}/api/products/${idProd}`);
-                console.log(response);
+					const data = await response.json();
 
-                const data = await response.json(); 
+					const producto = data.payload[0];
 
-                const producto = data.payload[0]; 
+					renderizarProducto(producto);
+				} catch (error) {
+					console.error("Error al obtener productos: ", error);
+				}
+			});
 
-                renderizarProducto(producto);
-
-            } catch (error) {
-                console.error("Error al obtener productos: ", error);
-            }
-        });
-
-        function renderizarProducto(producto) {
-            let htmlProducto = `
-                <ul class="listados-container">
-                    <li class="li-listados">
-                        <img src="${producto.image}" alt="${producto.name}" class="img-listados">
-                    </li>
-                    <li class="li-listados">
-                        Id: ${producto.id} / Nombre: ${producto.name} / <strong>Precio: $${producto.price}</strong>
-                    </li>
-                    <li class="li-listados">
-                        <button id="btn-eliminar">Eliminar</button>
-                    </li>
-                </ul>
+			function renderizarProducto(producto) {
+				let htmlProducto = `
+                <div class="product-card">
+					<div class="card-img-wrapper">
+                        <img class="card-img" src="${producto.image}" alt="${producto.name}">
+                    </div>
+                    <div class="card-content">
+                        <h4>${producto.name}</h4>
+                        <p>ID: ${producto.id}</p>
+                        <p class="product-price">$ ${producto.price}</p>
+                        <button id="btn-eliminar">Eliminar producto</button>
+                    </div>
+                </div>
             `;
 
-            contenedorProductos.innerHTML = htmlProducto;
+				contenedorProductos.innerHTML = htmlProducto;
 
-            
-            const btnEliminar = document.getElementById("btn-eliminar");
-            btnEliminar.addEventListener("click", () => {
-                
-                const confirmacion = confirm("¿Queres eliminar este producto?");
+				const btnEliminar = document.getElementById("btn-eliminar");
+				btnEliminar.addEventListener("click", () => {
+					const confirmacion = confirm("¿Queres eliminar este producto?");
 
-                if (!confirmacion) {
-                    alert("Eliminacion cancelada");
-                } else {
-                    eliminarProducto(producto.id);
-                }
-            });
-        }
+					if (!confirmacion) {
+						alert("Eliminacion cancelada");
+					} else {
+						eliminarProducto(producto.id);
+					}
+				});
+			}
 
-        async function eliminarProducto(id) {
-            try {
-                const response = await fetch(`${urlBase}/api/products/${id}`, {
-                    method: "DELETE"
-                });
+			async function eliminarProducto(id) {
+				try {
+					const response = await fetch(`${urlBase}/api/products/${id}`, {
+						method: "DELETE",
+					});
 
-                console.log(response);
+					console.log(response);
 
-                const data = await response.json(); 
+					const data = await response.json();
 
-                console.log(data.message);
-                alert(data.message);
+					console.log(data.message);
+					alert(data.message);
 
-                contenedorProductos.innerHTML = "";
-
-            } catch (error) {
-                console.error("Erro al eliminar un producto: ", error);
-            }
-        }
-    </script>
-
-
-
-
-
-
-
-
-
-
-
-</body>
+					contenedorProductos.innerHTML = "";
+				} catch (error) {
+					console.error("Erro al eliminar un producto: ", error);
+				}
+			}
+		</script>
+	</body>
 </html>

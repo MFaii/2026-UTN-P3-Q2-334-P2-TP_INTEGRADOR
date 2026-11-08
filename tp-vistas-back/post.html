@@ -1,116 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear</title>
-    <link rel="stylesheet" href="css/style.css">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Crear</title>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<header class="main-header">
+			<div class="logo-container">
+				<img class="logo" src="https://imgs.search.brave.com/8h4vB2gSbouXiOR60Pn4my-vtEp8diBu5KRBHIR7s_I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mcmVl/cG5naW1nLmNvbS90/aHVtYi9sb2dvLzcx/NzY2LWxvZ28tdmVj/dG9yLWRlc2lnbi1p/bGx1c3RyYXRpb24t/cGhvZW5peC1oZC1p/bWFnZS1mcmVlLXBu/Zy10aHVtYi53ZWJw" alt="logo" />
+			</div>
 
-</head>
-<body>
-    <header>
-        <div class="logo-container">
-            <img class="" src="" alt="logo">
-        </div>
+			<nav class="nav-links">
+				<a href="index.html">Principal</a>
 
-        <nav>
-            <ul>
-                <li class="lista-header">
-                    <a href="index.html">Principal</a>
-                </li>
+				<a href="get.html">Obtener</a>
 
-                <li class="lista-header">
-                    <a href="get.html">Obtener</a>
-                </li>
+				<a href="post.html">Crear</a>
 
-                <li class="lista-header">
-                    <a href="post.html">Crear</a>
-                </li>
+				<a href="put.html">Modificar</a>
 
-                <li class="lista-header">
-                    <a href="put.html">Modificar</a>
-                </li>
+				<a href="delete.html">Eliminar</a>
+			</nav>
+		</header>
 
-                <li class="lista-header">
-                    <a href="delete.html">Eliminar</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+		<main>
+			<!------ Formulario POST----------->
+			<section class="createProduct-container">
+				<h3>Crear Producto</h3>
 
-    <main>
-        <!------ Formulario POST----------->
-        <section class="createProduct-container">
+				<form id="createProductForm">
+					<label for="categoryProd">Categoria</label>
+					<select name="category" id="categoryProd" required>
+						<option value="tv">Tv's</option>
+						<option value="celulares">Celulares</option>
+						<option value="monitores">Monitores</option>
+						<option value="notebooks">Notebooks</option>
+					</select>
 
-            <h3>Crear Producto</h3>
+					<label for="imageProd">Imagen</label>
+					<input type="text" name="image" id="imageProd" required />
 
-            <form id="createProductForm">
+					<label for="nameProd">Nombre</label>
+					<input type="text" name="name" id="nameProd" required />
 
-                <label for="categoryProd">Categoria</label>
-                <select name="category" id="categoryProd" required>
-                    <option value="tv">Tv's</option>
-                    <option value="celulares">Celulares</option>
-                    <option value="monitores">Monitores</option>
-                    <option value="notebooks">Notebooks</option>
-                </select>
+					<label for="priceProd">Precio</label>
+					<input type="number" name="price" id="priceProd" min="1" required />
 
-                <label for="imageProd">Imagen</label>
-                <input type="text" name="image" id="imageProd" required>
+					<input type="submit" value="Crear Producto" />
+				</form>
+			</section>
 
-                <label for="nameProd">Nombre</label>
-                <input type="text" name="name" id="nameProd" required>
+			<section id="contenedor-productos"></section>
+		</main>
 
-                <label for="priceProd">Precio</label>
-                <input type="number" name="price" id="priceProd" min="1" required>
+		<footer class="main-footer">
+			<p>&copy; 2026 Tienda ficticia. Todos los derechos reservados</p>
+		</footer>
 
-                <input type="submit" value="Crear Producto">
+		<script>
+			const urlBase = "http://localhost:3001";
+			const contenedorProductos = document.getElementById("contenedor-productos");
+			const getProductForm = document.getElementById("getProductForm");
+			const createProductForm = document.getElementById("createProductForm");
 
-            </form>
-        </section>
+			createProductForm.addEventListener("submit", async (event) => {
+				event.preventDefault();
 
-              <section id="contenedor-productos"></section>
-    </main>
+				const formData = new FormData(event.target);
+				console.log(formData);
 
-    <script>
-        const urlBase = "http://localhost:3001";
-        const contenedorProductos = document.getElementById("contenedor-productos");
-        const getProductForm = document.getElementById("getProductForm");
-        const createProductForm = document.getElementById("createProductForm");
+				const formObj = Object.fromEntries(formData.entries());
+				console.log(formObj);
 
-        createProductForm.addEventListener("submit", async event => {
-            
-            event.preventDefault(); 
+				console.log(JSON.stringify(formObj));
 
-            const formData = new FormData(event.target);
-            console.log(formData); 
+				try {
+					const response = await fetch(`${urlBase}/api/products`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(formObj),
+					});
 
-            const formObj = Object.fromEntries(formData.entries());
-            console.log(formObj);          
-            
-            console.log(JSON.stringify(formObj)); 
+					const data = await response.json();
 
-            try {
-                const response = await fetch(`${urlBase}/api/products`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(formObj)
-                });
-
-                const data = await response.json(); 
-
-                console.log(data.message);
-                alert(data.message);
-
-
-            } catch (error) {
-                console.error("Error al obtener productos: ", error);
-            }
-
-    })
-
-    </script>
-
-</body>
+					console.log(data.message);
+					alert(data.message);
+				} catch (error) {
+					console.error("Error al obtener productos: ", error);
+				}
+			});
+		</script>
+	</body>
 </html>
