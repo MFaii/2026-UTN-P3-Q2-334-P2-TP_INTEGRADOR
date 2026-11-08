@@ -37,6 +37,109 @@
             </ul>
         </nav>
     </header>
-    
+
+     <main>
+        <h3>Consultar producto por id</h3>
+        
+        <form id="getProductForm">
+            <label for="idProd">Id producto</label>
+            <input type="number" name="id" id="idProd" min="1" required>
+
+            <input type="submit" value="Consultar">
+        </form>
+
+        <section id="contenedor-productos"></section>
+    </main>
+
+    <script>
+        const urlBase = "http://localhost:3001";
+        const contenedorProductos = document.getElementById("contenedor-productos");
+        const getProductForm = document.getElementById("getProductForm");
+
+        
+        getProductForm.addEventListener("submit", async (event) => {
+            event.preventDefault(); 
+
+
+            const idProd = event.target.idProd.value.trim();
+            console.log(idProd); 
+
+            try {
+                const response = await fetch(`${urlBase}/api/products/${idProd}`);
+                console.log(response);
+
+                const data = await response.json(); 
+
+                const producto = data.payload[0]; 
+
+                renderizarProducto(producto);
+
+            } catch (error) {
+                console.error("Error al obtener productos: ", error);
+            }
+        });
+
+        function renderizarProducto(producto) {
+            let htmlProducto = `
+                <ul class="listados-container">
+                    <li class="li-listados">
+                        <img src="${producto.image}" alt="${producto.name}" class="img-listados">
+                    </li>
+                    <li class="li-listados">
+                        Id: ${producto.id} / Nombre: ${producto.name} / <strong>Precio: $${producto.price}</strong>
+                    </li>
+                    <li class="li-listados">
+                        <button id="btn-eliminar">Eliminar</button>
+                    </li>
+                </ul>
+            `;
+
+            contenedorProductos.innerHTML = htmlProducto;
+
+            
+            const btnEliminar = document.getElementById("btn-eliminar");
+            btnEliminar.addEventListener("click", () => {
+                
+                const confirmacion = confirm("¿Queres eliminar este producto?");
+
+                if (!confirmacion) {
+                    alert("Eliminacion cancelada");
+                } else {
+                    eliminarProducto(producto.id);
+                }
+            });
+        }
+
+        async function eliminarProducto(id) {
+            try {
+                const response = await fetch(`${urlBase}/api/products/${id}`, {
+                    method: "DELETE"
+                });
+
+                console.log(response);
+
+                const data = await response.json(); 
+
+                console.log(data.message);
+                alert(data.message);
+
+                contenedorProductos.innerHTML = "";
+
+            } catch (error) {
+                console.error("Erro al eliminar un producto: ", error);
+            }
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

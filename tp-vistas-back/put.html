@@ -37,6 +37,150 @@
             </ul>
         </nav>
     </header>
+
+    <main>
+        <h3>Consultar producto por id</h3>
+
+            <form id="getProductForm">
+
+                <label for="idProd">Id Producto</label>
+                <input type="number" name="id" id="idProd" min="1" required>
+
+                <input type="submit" value="Consultar">
+
+            </form>
+
+            <section id="contenedor-prod"></section>
+            <section id="contenedor-form"></section>
+
+    </main>
+
+    <script>
+        const urlBase = "http://localhost:3001";
+        const contenedorProductos = document.getElementById("contenedor-prod");
+        const contenedorForm = document.getElementById("contenedor-form");
+        const getProductForm = document.getElementById("getProductForm");
+
+        getProductForm.addEventListener("submit", async(event) => {
+            event.preventDefault();
+
+            const idProd = event.target.idProd.value.trim();
+            console.log(idProd);
+
+            try {
+                const response = await fetch(`${urlBase}/api/products/${idProd}`);
+                console.log(response);
+
+                const data = await response.json();
+
+                const producto = data.payload[0];
+
+                renderizarProducto(producto);
+
+            } catch (error) {
+                console.error("Error al obtener productos: ", error);
+            }
+
+        });
+
+        function renderizarProducto(producto) {
+            let htmlProducto = `
+            <ul class="listados-container">
+                <li class="li-listados">
+                    <img src="${producto.image}" alt="${producto.name}" class="img-listados">
+                </li>
+                <li class="li-listados">
+                    Id: ${producto.id} / Nombre: ${producto.name} / <strong>Precio: $${producto.price}</strong>
+                </li>
+                <li class="li-listados">
+                    <button id="btn-modificar">Modificar</button>
+                </li>
+            </ul>
+            `;
+
+            contenedorProductos.innerHTML = htmlProducto;
+
+            const btnModificar = document.getElementById("btn-modificar");
+            btnModificar.addEventListener("click", () => {
+
+                const confirmacion = confirm("¿Queres modificar este producto?");
+
+                if(!confirmacion){
+                    alert("Modificacion Cancelada");
+                } else {
+                    renderizarFormularioPut(producto);
+                }
+            });
+        }
+
+        function renderizarFormularioPut(producto) {
+            console.table(producto);
+
+            let htmlForm = ` 
+            <h3>Modificar Producto</h3>
+
+            <form id="modifyProductForm">
+
+                <input type="hidden" name="id" id="idProd" value="${producto.id}">
+
+                <label for="categoryProd">Categoria</label>
+                <select name="category" id="categoryProd" required>
+                    <option value="tv">Tv's</option>
+                    <option value="celulares">Celulares</option>
+                    <option value="monitores">Monitores</option>
+                    <option value="notebooks">Notebooks</option>
+                    </select>
+
+                    <label for="imageProd">Imagen</label>
+                    <input type="text" name="image" id="imageProd" value="${producto.image}" required>
+
+                <label for="nameProd">Nombre</label>
+                <input type="text" name="name" id="nameProd" value="${producto.name}" required>
+
+                <label for="priceProd">Precio</label>
+                <input type="number" name="name" id="priceProd" min="1" value="${producto.price}" required>
+
+                <input type="submit" value="Modificar Producto">
+            </form>
+            `;
+
+            contenedorForm.innerHTML = htmlForm;
+
+            const modifyProductForm = document.getElementById("modifyProductForm");
+
+            modifyProductForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const formData = new FormData(event.target);
+
+                const formObj = Object.fromEntries(formData.entries());
+
+                try {
+                    const response = await fetch(`${urlBase}/api/products`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(formObj)
+                    });
+
+                    const data = await response.json();
+
+                    console.log(data.message);
+                    alert(data.message);
+
+                    contenedorForm.innerHTML = "";
+                    contenedorProductos.innerHTML = "";
+
+                } catch (error) {
+                    console.error("Ocurrio un error al modificar un producto: ", error);
+                }
+
+            })
+        }
+
+    </script>
+
     
 </body>
 </html>
