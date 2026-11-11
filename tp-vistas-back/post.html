@@ -76,6 +76,8 @@
 
 				console.log(JSON.stringify(formObj));
 
+				formObj.price = Number(formObj.price);
+
 				try {
 					const response = await fetch(`${urlBase}/api/products`, {
 						method: "POST",
