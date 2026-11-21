@@ -45,6 +45,13 @@ export const vistaEliminar = (req, res) => {
 export const vistaCrearUsuario = (req, res) => {
 	res.render("createUser", {
 		title: "Crear usuario",
-		about: "Crear usuario admin"
+		about: "Crear usuario admin",
 	});
-}
+};
+
+export const vistaLogin = (req, res) => {
+	res.render("login", {
+		title: "Login usuario",
+		about: "Login de usuario admin",
+	});
+};

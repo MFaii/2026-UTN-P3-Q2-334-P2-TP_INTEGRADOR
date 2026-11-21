@@ -24,9 +24,13 @@
 
     </section>
     
+    <% if (typeof error !== "undefined") { %>
+        <p class="error-message"><%= error %></p>
+    <% } %>
+
     <% if (typeof message !== "undefined") { %>
-            <p class="mensaje exito centrado"> <%= message %> </p>
-        <% } %>
+     <p class="success-message"><%= message %></p>
+    <% } %>
 
 </main>
 <%- include("partials/footer.ejs") %> 
