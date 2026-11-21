@@ -1,0 +1,31 @@
+	<%- include("partials/head.ejs") %>
+	<%- include("partials/header.ejs") %>
+
+		<main>
+			<section id="contenedor-productos" class="catalog-section">
+				<% listaProductos.forEach(producto => { %>
+
+					<div class="product-card">
+
+						<div class="card-img-wrapper">
+							<img class="card-img" src="<%=producto.image%>" alt="<%producto.name%>">
+						</div>
+
+						<div class="card-content">
+							
+							<h4><%=producto.name%></h4>
+
+							<p>ID: <%=producto.id%></p>
+
+							<p class="product-price">$ <%=producto.price%></p>
+
+							<p class="product-price">Estado: <%=producto.active%></p>
+
+						</div>
+
+					</div>
+				<% }) %>
+			</section>
+		</main>
+
+<%- include("partials/footer.ejs") %>
