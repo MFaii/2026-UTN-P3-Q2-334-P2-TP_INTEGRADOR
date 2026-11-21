@@ -27,12 +27,23 @@ app.use(loggerUrl);
 /* ========== Archivos estaticos ========== */
 
 app.use(express.static(join(__dirname, "src/public")));
+app.use(express.urlencoded({extended: true}));
+
+app.use(session({
+	secret:session_key,
+	resave: false, 
+	saveUnitialized: true
+}));
 
 /**========= ENDPOINTS =================== */
 
 app.use("/api/products", productRoutes);
 
 app.use("/dashboard", viewRoutes);
+//Rutas de autenticacion
+app.use("/", authRoutes);
+
+
 
 app.listen(PORT, () => {
 	console.log(`Servidor corriendo en puerto ${PORT}`);
