@@ -20,7 +20,7 @@ router.post("/login", async (req, res) => {
 
         if(!email || !password) {
             //Renderizo la vista del login.ejs
-            return res.render("Login", {
+            return res.render("login", {
                 title: "Login usuario",
                 about: "Login usuario admin",
                 error: "Todos los campos son requeridos"
@@ -60,3 +60,24 @@ router.post("/login", async (req, res) => {
         });
     }
 });
+
+
+router.post("/logout", (req, res) => {
+
+    req.session.destroy((err) => {
+
+        if (err) {
+            console.log("Error al destruir la sesion: ", err);
+
+            return res.status(500).json({
+                message: "Error al cerrar la sesion"
+            });
+        }
+        
+        //redirige al login
+        res.redirect("/login"); 
+    })
+})
+
+
+export default router;

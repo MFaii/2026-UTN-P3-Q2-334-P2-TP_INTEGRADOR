@@ -41,3 +41,10 @@ export const vistaEliminar = (req, res) => {
 		title: "Eliminar ",
 	});
 };
+
+export const vistaCrearUsuario = (req, res) => {
+	res.render("createUser", {
+		title: "Crear usuario",
+		about: "Crear usuario admin"
+	});
+}

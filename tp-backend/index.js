@@ -4,9 +4,10 @@ import express from "express";
 import enviroments from "./src/api/config/enviroments.js";
 import connection from "./src/api/database/db.js";
 import cors from "cors";
-import { productRoutes, viewRoutes } from "./src/api/routes/index.js";
+import { productRoutes, viewRoutes, authRoutes, userRoutes } from "./src/api/routes/index.js";
 import { loggerUrl } from "./src/api/middlewares/middlewares.js";
 import { join, __dirname } from "./src/api/utils/index.js";
+import session from "express-session";
 
 const app = express();
 const PORT = enviroments.port;
@@ -30,18 +31,22 @@ app.use(express.static(join(__dirname, "src/public")));
 app.use(express.urlencoded({extended: true}));
 
 app.use(session({
-	secret:session_key,
+	secret: enviroments.session_key,
 	resave: false, 
 	saveUnitialized: true
 }));
 
-/**========= ENDPOINTS =================== */
+
+/* ========= ENDPOINTS =================== */
 
 app.use("/api/products", productRoutes);
 
 app.use("/dashboard", viewRoutes);
+
 //Rutas de autenticacion
 app.use("/", authRoutes);
+
+app.use("/api/users", userRoutes);
 
 
 
