@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Catalogo</title>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<header class="main-header">
+			<div class="logo-container">
+				
+                <img class="logo" src="https://imgs.search.brave.com/8h4vB2gSbouXiOR60Pn4my-vtEp8diBu5KRBHIR7s_I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mcmVl/cG5naW1nLmNvbS90/aHVtYi9sb2dvLzcx/NzY2LWxvZ28tdmVj/dG9yLWRlc2lnbi1p/bGx1c3RyYXRpb24t/cGhvZW5peC1oZC1p/bWFnZS1mcmVlLXBu/Zy10aHVtYi53ZWJw" alt="logo" />
+                <h1 id="texto-bienvenida"></h1>
+			</div>
+			
+		</header>
+		<h2 id="text-catalogo">Nuestros Productos</h2>
+
+		<main>
+			<section id="contenedor-productos" class="catalog-section"></section>
+		</main>
+
+		<footer class="main-footer">
+			<p>&copy; 2026 Tienda ficticia. Todos los derechos reservados</p>
+		</footer>
+
+
+
+		<script>
+			const urlBase = "http://localhost:3001";
+			const contenedorProductos = document.getElementById("contenedor-productos");
+
+			async function obtenerProductos() {
+				try {
+					const response = await fetch(`${urlBase}/api/products`);
+					console.log(response);
+
+					const data = await response.json();
+
+                    if(!response.ok) {
+                        contenedorProductos.innerHTML = ` <p>${data.message}</p>`;
+                        return;
+                    }
+
+					const productos = data.payload;
+
+					renderizarProducto(productos);
+				} catch (error) {
+					console.error("Error al obtener productos: ", error);
+				}
+			}
+
+			function renderizarProducto(array) {
+				let htmlProductos = "";
+
+				array.forEach((producto) => {
+					htmlProductos += `
+                <div class="product-card">
+                    <div class="card-img-wrapper">
+                        <img class="card-img" src="${producto.image}" alt="${producto.name}">
+                    </div>
+                    <div class="card-content">
+                        <h4>${producto.name}</h4>
+                        <p>ID: ${producto.id}</p>
+                        <p class="product-price">$ ${producto.price}</p>
+                    </div>
+                </div>
+                `;
+				});
+
+				contenedorProductos.innerHTML = htmlProductos;
+			}
+
+			const nombreCliente = sessionStorage.getItem("nombre");
+
+			if(!nombreCliente) {
+				window.location.replace("index.html");
+			} else {
+				obtenerProductos();
+
+				const titulo = document.getElementById("texto-bienvenida");
+				if (titulo) {
+					titulo.textContent = `Bienvenido/a ${nombreCliente}`;
+				}
+				
+			}
+		</script>
+
+	</body>
+	
+</html>

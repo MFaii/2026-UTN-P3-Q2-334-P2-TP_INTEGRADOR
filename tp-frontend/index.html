@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida</title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <header class="main-header">
+
+        <main class="bienvenida">
+        <h1>Bienvenido a la tienda</h1>
+
+    </header>
+
+        <form id="formBienvenida">
+            <label for="nombre">Ingresa tu nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+
+            <button type="submit">Ingresar</button>
+        </form>
+
+        <p id="mensaje" class="error-message"></p>
+    </main>
+
+    <script>
+        const formBienvenida = document.getElementById("formBienvenida");
+        const mensaje = document.getElementById("mensaje");
+
+        formBienvenida.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const nombre = document.getElementById("nombre").value.trim(); //Elimina los espacios
+
+            if(nombre.length < 2) {
+                mensaje.textContent = "Ingresa un nombre de al menos 2 letras";
+                return;
+            }
+
+            sessionStorage.setItem("nombre", nombre);
+            window.location.href = "tienda.html";
+        })
+    </script>
+    
+</body>
+</html>
