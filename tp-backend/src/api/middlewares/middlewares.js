@@ -1,3 +1,5 @@
+import authModels from "../models/auth.models.js";
+
 export const loggerUrl = (req, res, next) => {
 	const fecha = new Date();
 	console.log(`[${fecha.toLocaleDateString()} ${fecha.toLocaleTimeString()}] ${req.method} ${req.url}`);
@@ -41,11 +43,33 @@ export const validateProduct = (req, res, next) => {
 };
 
 export const requireLogin = (req, res, next) => {
-	if(!req.session.user) {
+	if (!req.session.user) {
 		return res.redirect("/login");
 	}
 
 	next();
-}
+};
 
+export const checkExistingUser = async (req, res, next) => {
+	try {
+		const { email } = req.body;
 
+		const [rows] = await authModels.selectUserByEmail(email);
+
+		if (rows.length > 0) {
+			return res.render("createUser", {
+				title: "Crear usuario",
+				about: "Crear usuario admin",
+				error: "El email ingresado ya se encuentra registrado",
+			});
+		}
+
+		next();
+	} catch (error) {
+		console.log("Error verificando usuario:", error);
+
+		return res.status(500).json({
+			message: "Error interno al verificar el usuario",
+		});
+	}
+};

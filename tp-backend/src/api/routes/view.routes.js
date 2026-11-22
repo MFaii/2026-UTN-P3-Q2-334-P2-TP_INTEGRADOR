@@ -4,7 +4,7 @@ import { requireLogin } from "../middlewares/middlewares.js";
 
 const router = Router();
 
-router.get("/principal", requireLogin, vistaPrincipal );
+router.get("/principal", requireLogin, vistaPrincipal);
 
 router.get("/consultar", requireLogin, vistaConsultar);
 
