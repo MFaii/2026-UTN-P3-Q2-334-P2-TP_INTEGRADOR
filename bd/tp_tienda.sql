@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 05-11-2026 a las 01:39:52
--- Versión del servidor: 8.0.46-0ubuntu0.24.04.4
+-- Tiempo de generación: 21-11-2026 a las 18:30:40
+-- Versión del servidor: 8.0.46-0ubuntu0.24.04.5
 -- Versión de PHP: 8.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -62,6 +62,39 @@ INSERT INTO `products` (`id`, `name`, `image`, `category`, `price`, `active`) VA
 (19, 'Notebook Lenovo V15 16GB 1TB', 'https://images.fravega.com/f500/8bf0b3e0aa1a9e9d661b0afc53cde7c0.jpg', 'notebooks', 2801000.00, 1),
 (20, 'Notebook HP 14 Intel core5 8GB 512GB', 'https://images.fravega.com/f500/0da36b6c5a00466826dce2dc459540e6.jpg', 'notebooks', 1449000.00, 1);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE `users` (
+  `id` int NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
+(1, 'Admin Tienda', 'admintienda@tienda.com', 'tienda'),
+(2, 'Lucía Fernández', 'lucia.fernandez@tienda.com', 'fernandezl'),
+(3, 'Martín Gómez', 'martin.gomez@tienda.com', 'gomezm'),
+(4, 'Sofía Rodríguez', 'sofia.rodriguez@tienda.com', 'rodriguezs'),
+(5, 'Mateo López', 'mateo.lopez@tienda.com', 'lopezm'),
+(6, 'Valentina Díaz', 'valentina.diaz@tienda.com', 'diazv'),
+(7, 'Joaquín Martínez', 'joaquin.martinez@tienda.com', 'martinezj'),
+(8, 'Camila Sánchez', 'camila.sanchez@tienda.com', 'sanchezc'),
+(9, 'Tomás Pérez', 'tomas.perez@tienda.com', 'perezt'),
+(10, 'Julieta Romero', 'julieta.romero@tienda.com', 'romeroj'),
+(11, 'Nicolás Torres', 'nicolas.torres@tienda.com', 'torresn'),
+(12, 'Agustina Álvarez', 'agustina.alvarez@tienda.com', 'alvareza'),
+(13, 'Facundo Ruiz', 'facundo.ruiz@tienda.com', 'ruizf'),
+(14, 'Milagros Acosta', 'milagros.acosta@tienda.com', 'milagrosa');
+
 --
 -- Índices para tablas volcadas
 --
@@ -73,6 +106,13 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -81,6 +121,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
