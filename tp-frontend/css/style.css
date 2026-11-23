@@ -44,7 +44,7 @@ main {
 }
 
 .logo {
-	height: 80px;
+	height: 110px;
 	width: auto;
 }
 
@@ -89,6 +89,7 @@ main {
 .product-card:hover {
 	transform: translateY(-5px);
 	cursor: pointer;
+	box-shadow: 0 8px 20px rgb(0, 0, 0, 0.12);
 }
 
 .card-img-wrapper img {
@@ -115,6 +116,12 @@ main {
 	font-weight: 700;
 }
 
+.product-price {
+	color: #ff6600;
+	font-weight: 700;
+}
+
+
 /* ===== Footer ===== */
 .main-footer {
 	flex-shrink: 0;
@@ -124,7 +131,7 @@ main {
 	color: #ffffff;
 }
 
-/* ===== Formularios (tarjeta blanca, campos y boton) ===== */
+/* ===== Formularios ===== */
 
 form {
 	display: flex;
@@ -183,7 +190,9 @@ button:hover {
 	background-color: #ff6600;
 }
 
-/* ===== Celulares ===== */
+
+/* ===== Celulares ===== 
+==========================*/
 @media (max-width: 768px) {
 	.main-header {
 		flex-direction: column;
@@ -193,7 +202,7 @@ button:hover {
 	}
 
 	.logo {
-		height: 56px;
+		height: 70px;
 	}
 
 	.nav-links {
@@ -217,6 +226,7 @@ button:hover {
 	}
 }
 
+
 /* ===== Pantalla de bienvenida ===== */
 
 
@@ -236,7 +246,7 @@ button:hover {
 	text-align: center;
 }
 
-/* Tarjeta blanca del formulario */
+/* ====== Tarjeta blanca del formulario ======= */
 #formBienvenida {
 	width: 100%;
 	max-width: 380px;
@@ -258,6 +268,18 @@ button:hover {
 	padding-left: 1rem;
 }
 
+#text-catalogo {
+	width: fit-content;
+	background-color: #ff6600;
+	color: whitesmoke;
+	margin: 3rem auto 0;
+	padding: 0.5rem 1.5rem;
+	border-radius: 10px;
+	font-size:x-large;
+	font-weight:bolder;
+	box-shadow: 0 8px 20px rgba(0, 0, 0,0.2);
+}
+
 /* ===== Boton naranja ====== */
 #formBienvenida button {
 	background-color: #ff6600;
@@ -273,10 +295,7 @@ button:hover {
 	text-align: center;
 }
 
-#text-catalogo {
-	font-size:x-large;
-	font-weight:bolder;
-	
-	padding-left: 43%;
-	padding-top: 60px;
+/*======= Footer logo ========*/
+.footer-logo {
+	height: 60px;
 }
