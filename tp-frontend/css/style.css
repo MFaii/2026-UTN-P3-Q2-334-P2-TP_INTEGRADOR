@@ -268,7 +268,7 @@ button:hover {
 }
 
 /* ===== Mensaje de error ==== */
-.mensaje-error {
+.error-message {
 	color: #ff8a80;
 	text-align: center;
 }
@@ -276,6 +276,7 @@ button:hover {
 #text-catalogo {
 	font-size:x-large;
 	font-weight:bolder;
+	
 	padding-left: 43%;
 	padding-top: 60px;
 }
