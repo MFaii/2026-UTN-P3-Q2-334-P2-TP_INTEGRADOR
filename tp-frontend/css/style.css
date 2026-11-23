@@ -17,6 +17,7 @@ body {
 	flex-direction: column;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	background-color: #f9f9f9;
+	background: linear-gradient(110deg, #eeecec, #ffeadc);
 	color: #333;
 	line-height: 1.5;
 }
@@ -41,12 +42,30 @@ main {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
+	width: 100%;
+	max-width: 1200px;
+	margin: auto;
+}
+
+.logo-index-container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 1rem;
 }
 
 .logo {
 	height: 110px;
 	width: auto;
+	margin-left: 6rem;
 }
+
+.logo-form {
+	height: 140px;
+	width: auto;
+}
+
 
 .nav-links {
 	display: flex;
@@ -63,6 +82,13 @@ main {
 .nav-links a:hover {
 	color: #ff6600;
 }
+
+.text-container {
+	display: flex;
+	flex-direction: column;
+}
+
+
 
 /* ===== Catalogo de productos ===== */
 
@@ -246,15 +272,27 @@ button:hover {
 	text-align: center;
 }
 
+#listado {
+	color: #ff6600;
+	margin-left: 18px;
+}
+
+
+#texto-bienvenida {
+	margin-left: auto;
+	margin-right: 5.2rem;
+	margin-top: 2.5rem;
+}
+
+
 /* ====== Tarjeta blanca del formulario ======= */
 #formBienvenida {
 	width: 100%;
 	max-width: 380px;
 	display: flex;
 	align-items: center;
-	margin-left: 35%;
-	padding-top: 50px;
-	
+	margin-left: 36%;
+	padding-top: 50px;	
 }
 
 /* ==== Campo de texto ==== */
