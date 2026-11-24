@@ -1,8 +1,8 @@
-# 2026-UTN-P3-Q2-334-P2-TP_INTEGRADOR
+# TP Integrador – Tecno Store
 
-# TP Integrador
+Proyecto desarrollado como trabajo práctico integrador de **Programación III** (UTN Avellaneda).
 
-Proyecto desarrollado como parte del trabajo práctico integrador
+Aplicación web de una tienda de tecnología: API REST con Node.js + Express, base de datos MySQL y vistas renderizadas con EJS.
 
 ## Instalación
 
@@ -24,9 +24,19 @@ cd tp-backend/
 npm install
 ```
 
+4. Crear la base de datos importando el script `bd/tp_tienda.sql` (ver la sección siguiente).
+
+## Base de datos (XAMPP)
+
+El proyecto usa MySQL a través de **XAMPP** y **phpMyAdmin**.
+
+1. Abrir el panel de XAMPP e iniciar el módulo **MySQL** (Start).
+2. Ingresar a [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
+3. Ir a la pestaña **Importar**, seleccionar el archivo `bd/tp_tienda.sql` y ejecutar.
+
 ## Configuración de variables de entorno
 
-Crear un archivo `.env` en la raíz del proyecto, tomando como referencia la siguiente plantilla:
+Crear un archivo `.env` en la raíz de `tp-backend/`, tomando como referencia `.env.modelo`:
 
 ```env
 # Servidor
@@ -37,19 +47,23 @@ DB_HOST="dbhost"
 DB_NAME="dbname"
 DB_USER="dbuser"
 DB_PASSWORD="dbpassword"
+
+# Sesiones
+SESSION_KEY="random"
 ```
 
-Completar los valores según la configuración de tu entorno local.
+| Variable      | Descripción                                                         |
+| ------------- | ------------------------------------------------------------------- |
+| `PORT`        | Puerto en el que se ejecutará el servidor.                          |
+| `DB_HOST`     | Dirección del servidor de base de datos.                            |
+| `DB_NAME`     | Nombre de la base de datos.                                         |
+| `DB_USER`     | Usuario de la base de datos.                                        |
+| `DB_PASSWORD` | Contraseña del usuario de la base de datos.                         |
+| `SESSION_KEY` | Clave secreta para firmar las sesiones (cualquier texto aleatorio). |
 
-| Variable      | Descripción                                 |
-| ------------- | ------------------------------------------- |
-| `PORT`        | Puerto en el que se ejecutará el servidor.  |
-| `DB_HOST`     | Dirección del servidor de base de datos.    |
-| `DB_NAME`     | Nombre de la base de datos.                 |
-| `DB_USER`     | Usuario de la base de datos.                |
-| `DB_PASSWORD` | Contraseña del usuario de la base de datos. |
+Con la configuración por defecto de XAMPP: `DB_HOST="localhost"`, `DB_USER="root"` y `DB_PASSWORD=""` (vacía).
 
-**Importante:** No subir el archivo `.env` al repositorio, ya que contiene información de configuración y credenciales. Asegurarse de incluirlo en `.gitignore`.
+**Importante:** No subir el archivo `.env` al repositorio, ya que contiene credenciales. Asegurarse de incluirlo en `.gitignore`.
 
 ## Ejecución
 
@@ -65,31 +79,37 @@ El servidor estará disponible en:
 http://localhost:3001
 ```
 
-## Estructura del proyecto
+## Arquitectura del proyecto
 
 ```text
 2026-UTN-P3-Q2-334-P2-TP_INTEGRADOR/
-│
 ├── README.md
 │
-└── tp-backend/
-    │
-    ├── node_modules/
-    │
-    ├── src/
-    │   └── api/
-    │       ├── config/
-    │       │   └── environments.js
-    │       │
-    │       └── database/
-    │           └── db.js
-    │
-    ├── .env
-    ├── .gitignore
-    ├── index.js
-    ├── package.json
-    └── package-lock.json
-
+├── bd/
+│   └── tp_tienda.sql              # Script de la base de datos
+│
+├── tp-backend/                    # Servidor
+│   ├── index.js                   # Punto de entrada
+│   ├── package.json
+│   ├── .env.modelo                # Plantilla de variables de entorno
+│   └── src/
+│       ├── api/
+│       │   ├── config/            # Configuración y variables de entorno
+│       │   ├── controllers/       # Lógica de cada endpoint
+│       │   ├── database/          # Conexión a MySQL
+│       │   ├── middlewares/       # Middlewares de la aplicación
+│       │   ├── models/            # Consultas a la base de datos
+│       │   ├── routes/            # Definición de rutas
+│       │   └── utils/             # Funciones auxiliares
+│       ├── public/                # Archivos estáticos
+│       └── views/                 # Vistas EJS
+│           └── partials/          # Head, header y footer reutilizables
+│
+└── tp-frontend/                   # Frontend estático
+    ├── index.html
+    ├── tienda.html
+    ├── css/
+    └── img/
 ```
 
 _La estructura es orientativa y puede variar según la organización del proyecto._

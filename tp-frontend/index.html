@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida</title>
+    <link rel="shortcut icon" href="./img/tecno-store.png"> 
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <header class="main-header">
+
+        <div class="logo-index-container">
+            <img class="logo-form" src="./img/tecno-store.png" alt="logo" />
+
+            <div class="text-container">
+                <h1>Tecnología a un click</h1>
+                <p id="listado">Tv's - Celulares - Notebooks - Monitores</p>               
+            </div>
+		</div>
+
+    </header>
+
+    <main class="bienvenida">
+
+        <form id="formBienvenida">
+            <label for="nombre">Ingresá tu nombre</label>  
+         <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+            <button type="submit">Ingresar</button>
+        </form>
+
+        <p id="mensaje" class="error-message"></p>
+    </main>
+
+    <script>
+        const formBienvenida = document.getElementById("formBienvenida");
+        const mensaje = document.getElementById("mensaje");
+
+        formBienvenida.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const nombre = document.getElementById("nombre").value.trim(); //Elimina los espacios
+
+            if(nombre.length < 2 || nombre.length > 30) {
+                mensaje.textContent = " El nombre debe tener entre 2 y 30 caracteres";
+                return;
+            }
+
+            sessionStorage.setItem("nombre", nombre);
+            window.location.href = "tienda.html";
+        })
+    </script>
+    
+</body>
+</html>
