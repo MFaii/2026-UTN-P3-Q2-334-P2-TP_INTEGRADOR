@@ -32,7 +32,7 @@ main {
 .main-header {
 	display: flex;
 	justify-content: center;
-	align-items: baseline;
+	align-items: center;
 	padding: 1.5rem 2rem;
 	background-color: #1a1a1a;
 	color: #ffffff;
@@ -44,7 +44,7 @@ main {
 	gap: 1rem;
 	width: 100%;
 	max-width: 1200px;
-	margin: auto;
+	margin: 0 auto;
 }
 
 .logo-index-container{
@@ -138,14 +138,10 @@ main {
 
 .product-price {
 	font-size: 1.2rem;
-	color: #1a1a1a;
-	font-weight: 700;
-}
-
-.product-price {
 	color: #ff6600;
 	font-weight: 700;
 }
+
 
 
 /* ===== Footer ===== */
@@ -217,41 +213,6 @@ button:hover {
 }
 
 
-/* ===== Celulares ===== 
-==========================*/
-@media (max-width: 768px) {
-	.main-header {
-		flex-direction: column;
-		gap: 0.75rem;
-		padding: 1rem;
-		text-align: center;
-	}
-
-	.logo {
-		height: 70px;
-	}
-
-	.nav-links {
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 1rem;
-	}
-
-	.catalog-section {
-		padding: 1.5rem 1rem;
-		gap: 1.5rem;
-	}
-
-	form {
-		width: 20rem;
-		padding: 1.25rem;
-	}
-
-	.main-footer {
-		padding: 1rem;
-	}
-}
-
 
 /* ===== Pantalla de bienvenida ===== */
 
@@ -263,10 +224,11 @@ button:hover {
 	align-items: center; 
 	gap: 1.5rem;
 	padding: 2rem;
-	background-color: #1a1a1a;
+	/*background-color: #1a1a1a;*/
 }
 
-/* Titulo en blanco y centrado */
+
+/* ===== Titulo =========== */
 .bienvenida h1 {
 	color: #ffffff;
 	text-align: center;
@@ -274,7 +236,6 @@ button:hover {
 
 #listado {
 	color: #ff6600;
-	margin-left: 18px;
 }
 
 
@@ -291,8 +252,6 @@ button:hover {
 	max-width: 380px;
 	display: flex;
 	align-items: center;
-	margin-left: 36%;
-	padding-top: 50px;	
 }
 
 /* ==== Campo de texto ==== */
@@ -329,11 +288,65 @@ button:hover {
 
 /* ===== Mensaje de error ==== */
 .error-message {
-	color: #ff8a80;
+	color: #f77063;
 	text-align: center;
 }
 
 /*======= Footer logo ========*/
 .footer-logo {
 	height: 60px;
+}
+
+
+
+
+
+
+
+
+
+/* ===== Celulares ===== 
+==========================*/
+@media (max-width: 768px) {
+	.main-header {
+		padding: 1rem;
+	}
+
+	.logo-container {
+		flex-direction: column;
+		text-align: center;
+		gap: 0.75rem;
+	}
+
+	.logo {
+		height: 56px;
+		margin-left: 0;
+	}
+
+	#texto-bienvenida {
+		margin: 0;
+	}
+
+	.logo-form {
+		height: 90px;
+	}
+
+	.catalog-section {
+		padding: 1.5rem 1rem;
+		gap: 1.5rem;
+	}
+
+	#text-catalogo {
+		margin-top: 1.5rem;
+		font-size: 1.1rem;
+	}
+
+	form {
+		width: 100%;
+		padding: 1.25rem;
+	}
+
+	.main-footer {
+		padding: 1rem;
+	}
 }
