@@ -15,17 +15,17 @@
 
             <div class="text-container">
                 <h1>Tecnología a un click</h1>
-                <p id="listado">Tv's - Celulares - Notebooks - Monitores</p>
-                
+                <p id="listado">Tv's - Celulares - Notebooks - Monitores</p>               
             </div>
 		</div>
 
     </header>
 
-        <form id="formBienvenida">
-            <label for="nombre">Ingresá tu nombre</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+    <main class="bienvenida">
 
+        <form id="formBienvenida">
+            <label for="nombre">Ingresá tu nombre</label>  
+         <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
             <button type="submit">Ingresar</button>
         </form>
 
@@ -41,8 +41,8 @@
 
             const nombre = document.getElementById("nombre").value.trim(); //Elimina los espacios
 
-            if(nombre.length < 2) {
-                mensaje.textContent = "Ingresa un nombre de al menos 2 letras";
+            if(nombre.length < 2 || nombre.length > 30) {
+                mensaje.textContent = " El nombre debe tener entre 2 y 30 caracteres";
                 return;
             }
 
