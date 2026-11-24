@@ -24,7 +24,15 @@ cd tp-backend/
 npm install
 ```
 
-4. Crear la base de datos importando el script `bd/tp_tienda.sql` en tu servidor MySQL.
+4. Crear la base de datos importando el script `bd/tp_tienda.sql` (ver la sección siguiente).
+
+## Base de datos (XAMPP)
+
+El proyecto usa MySQL a través de **XAMPP** y **phpMyAdmin**.
+
+1. Abrir el panel de XAMPP e iniciar el módulo **MySQL** (Start).
+2. Ingresar a [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
+3. Ir a la pestaña **Importar**, seleccionar el archivo `bd/tp_tienda.sql` y ejecutar.
 
 ## Configuración de variables de entorno
 
@@ -52,6 +60,8 @@ SESSION_KEY="random"
 | `DB_USER`     | Usuario de la base de datos.                                        |
 | `DB_PASSWORD` | Contraseña del usuario de la base de datos.                         |
 | `SESSION_KEY` | Clave secreta para firmar las sesiones (cualquier texto aleatorio). |
+
+Con la configuración por defecto de XAMPP: `DB_HOST="localhost"`, `DB_USER="root"` y `DB_PASSWORD=""` (vacía).
 
 **Importante:** No subir el archivo `.env` al repositorio, ya que contiene credenciales. Asegurarse de incluirlo en `.gitignore`.
 
