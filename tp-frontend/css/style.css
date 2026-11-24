@@ -1,0 +1,339 @@
+/* ===== Reseteo ===== */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+}
+
+
+body {
+	min-height: 100vh;
+	min-height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f9f9f9;
+	background: linear-gradient(110deg, #eeecec, #ffeadc);
+	color: #333;
+	line-height: 1.5;
+}
+
+main {
+	flex: 1 0 auto;
+	width: 100%;
+}
+
+/* ===== Header ===== */
+
+.main-header {
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+	padding: 1.5rem 2rem;
+	background-color: #1a1a1a;
+	color: #ffffff;
+}
+
+.logo-container {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	width: 100%;
+	max-width: 1200px;
+	margin: auto;
+}
+
+.logo-index-container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 1rem;
+}
+
+.logo {
+	height: 110px;
+	width: auto;
+	margin-left: 6rem;
+}
+
+.logo-form {
+	height: 140px;
+	width: auto;
+}
+
+
+.nav-links {
+	display: flex;
+	gap: 2rem;
+}
+
+.nav-links a {
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 600;
+	transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+	color: #ff6600;
+}
+
+.text-container {
+	display: flex;
+	flex-direction: column;
+}
+
+
+
+/* ===== Catalogo de productos ===== */
+
+.catalog-section {
+	padding: 3rem 2rem;
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	justify-content: center;
+}
+
+.product-card {
+	background: #ffffff;
+	border-radius: 8px;
+	overflow: hidden;
+	width: 320px;
+	max-width: 100%;
+	box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
+	transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+	transform: translateY(-5px);
+	cursor: pointer;
+	box-shadow: 0 8px 20px rgb(0, 0, 0, 0.12);
+}
+
+.card-img-wrapper img {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
+.card-content {
+	display: flex;
+	flex-direction: column;
+	padding: 1.5rem;
+	gap: 0.75rem;
+}
+
+.card-content h4 {
+	font-size: 1.25rem;
+	color: #1a1a1a;
+}
+
+.product-price {
+	font-size: 1.2rem;
+	color: #1a1a1a;
+	font-weight: 700;
+}
+
+.product-price {
+	color: #ff6600;
+	font-weight: 700;
+}
+
+
+/* ===== Footer ===== */
+.main-footer {
+	flex-shrink: 0;
+	text-align: center;
+	padding: 2rem;
+	background-color: #1a1a1a;
+	color: #ffffff;
+}
+
+/* ===== Formularios ===== */
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	width: 31.25rem;
+	max-width: 100%;
+	padding: 2rem;
+	background: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
+}
+
+form label {
+	font-weight: 600;
+	color: #1a1a1a;
+}
+
+form input {
+	width: 100%;
+	height: 2.25rem;
+	padding-left: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-family: inherit;
+	font-size: 1rem;
+	background-color: #ffffff;
+}
+
+form input:focus {
+	outline: none;
+	border-color: #ff6600;
+}
+
+form button {
+	margin-top: 1rem;
+	width: 100%;
+}
+
+/* ===== Botones ===== */
+button {
+	height: 2.5rem;
+	padding: 0.6rem 1.5rem;
+	border: none;
+	border-radius: 4px;
+	background-color: #1a1a1a;
+	color: #ffffff;
+	font-family: inherit;
+	font-weight: 600;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #ff6600;
+}
+
+
+/* ===== Celulares ===== 
+==========================*/
+@media (max-width: 768px) {
+	.main-header {
+		flex-direction: column;
+		gap: 0.75rem;
+		padding: 1rem;
+		text-align: center;
+	}
+
+	.logo {
+		height: 70px;
+	}
+
+	.nav-links {
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.catalog-section {
+		padding: 1.5rem 1rem;
+		gap: 1.5rem;
+	}
+
+	form {
+		width: 20rem;
+		padding: 1.25rem;
+	}
+
+	.main-footer {
+		padding: 1rem;
+	}
+}
+
+
+/* ===== Pantalla de bienvenida ===== */
+
+
+.bienvenida {
+	display: flex;
+	flex-direction: column;
+	justify-content: center; 
+	align-items: center; 
+	gap: 1.5rem;
+	padding: 2rem;
+	background-color: #1a1a1a;
+}
+
+/* Titulo en blanco y centrado */
+.bienvenida h1 {
+	color: #ffffff;
+	text-align: center;
+}
+
+#listado {
+	color: #ff6600;
+	margin-left: 18px;
+}
+
+
+#texto-bienvenida {
+	margin-left: auto;
+	margin-right: 5.2rem;
+	margin-top: 2.5rem;
+}
+
+
+/* ====== Tarjeta blanca del formulario ======= */
+#formBienvenida {
+	width: 100%;
+	max-width: 380px;
+	display: flex;
+	align-items: center;
+	margin-left: 36%;
+	padding-top: 50px;	
+}
+
+/* ==== Campo de texto ==== */
+#formBienvenida input,
+#formBienvenida button {
+	height: 2.75rem;
+	border-radius: 8px;
+}
+
+#formBienvenida input {
+	padding-left: 1rem;
+}
+
+#text-catalogo {
+	width: fit-content;
+	background-color: #ff6600;
+	color: whitesmoke;
+	margin: 3rem auto 0;
+	padding: 0.5rem 1.5rem;
+	border-radius: 10px;
+	font-size:x-large;
+	font-weight:bolder;
+	box-shadow: 0 8px 20px rgba(0, 0, 0,0.2);
+}
+
+/* ===== Boton naranja ====== */
+#formBienvenida button {
+	background-color: #ff6600;
+}
+
+#formBienvenida button:hover {
+	background-color: #e65c00;
+}
+
+/* ===== Mensaje de error ==== */
+.error-message {
+	color: #ff8a80;
+	text-align: center;
+}
+
+/*======= Footer logo ========*/
+.footer-logo {
+	height: 60px;
+}

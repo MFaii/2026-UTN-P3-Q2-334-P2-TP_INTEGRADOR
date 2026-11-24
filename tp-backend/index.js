@@ -12,10 +12,12 @@ import session from "express-session";
 const app = express();
 const PORT = enviroments.port;
 
+
 /* ========= Config EJS =========*/
 
 app.set("view engine", "ejs");
 app.set("views", join(__dirname, "src/views"));
+
 
 /*========== MIDDLEWARES ================ */
 
@@ -24,6 +26,7 @@ app.use(cors());
 app.use(express.json()); //Parsea el json para recibirlo en el endpoint como un objeto.
 
 app.use(loggerUrl);
+
 
 /* ========== Archivos estaticos ========== */
 
